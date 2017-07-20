@@ -1,7 +1,5 @@
 package kr.lotto.model.number;
 
-import kr.lotto.model.winNumber.WinNumberData;
-
 import java.util.List;
 
 /**

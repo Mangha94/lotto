@@ -10,7 +10,7 @@ import java.util.Map;
  * Created by LSH on 2017-07-18.
  */
 @Repository
-public class NumberRepositoryImp extends SqlSessionDaoSupport implements NumberRepository{
+public class NumberRepositoryImp extends SqlSessionDaoSupport implements NumberRepository {
 
     /**
      * 뽑았던 모든 목록을 가져온다

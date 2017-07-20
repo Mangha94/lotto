@@ -7,7 +7,7 @@ import java.util.List;
 
 
 @Service
-public class WinNumberSvImp implements WinNumberSv{
+public class WinNumberSvImp implements WinNumberSv {
     @Autowired
     private WinNumberRepository winNumberRepository;
 

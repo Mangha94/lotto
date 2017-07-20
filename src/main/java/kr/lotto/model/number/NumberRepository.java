@@ -37,5 +37,5 @@ public interface NumberRepository {
      * 등수를 매긴다
      * @param numberData 등수가 입력된 데이터
      */
-    void setRank(Map<String,Object> numberData);
+    void setRank(Map<String, Object> numberData);
 }
