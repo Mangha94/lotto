@@ -3,6 +3,9 @@ package kr.lotto.model.number;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.HashSet;
+import java.util.Set;
+import java.util.SortedSet;
 
 @Data
 public class NumberData {
@@ -96,5 +99,50 @@ public class NumberData {
 
     public void setPickDate(Date pickDate) {
         this.pickDate = pickDate;
+    }
+
+    public int getNum(int idx)
+    {
+        if (idx == 1)
+            return num1;
+        else if (idx == 2)
+            return num2;
+        else if (idx == 3)
+            return num3;
+        else if (idx == 4)
+            return num4;
+        else if (idx == 5)
+            return num5;
+        else if (idx == 6)
+            return num6;
+        else
+            return 0;
+    }
+
+    public void setNum(int idx,int no)
+    {
+        if (idx == 1)
+            num1=no;
+        else if (idx == 2)
+            num2=no;
+        else if (idx == 3)
+            num3=no;
+        else if (idx == 4)
+            num4=no;
+        else if (idx == 5)
+            num5=no;
+        else if (idx == 6)
+            num6=no;
+    }
+
+    public boolean checkNum (int num)
+    {
+        for (int j = 0; j <= 5; j++) {
+            if (getNum(j + 1) == num) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }

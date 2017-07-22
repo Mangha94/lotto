@@ -2,6 +2,8 @@ package kr.lotto.server.controller;
 
 import kr.lotto.model.number.NumberData;
 import kr.lotto.model.number.NumberSv;
+import kr.lotto.model.winNumber.WinNumberData;
+import kr.lotto.model.winNumber.WinNumberSv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -18,6 +20,8 @@ import java.util.List;
 public class NumberCt {
     @Autowired
     private NumberSv numberSv;
+    @Autowired
+    private WinNumberSv winNumberSv;
 
     @RequestMapping(value = "/pickNumber.do",method = {RequestMethod.GET,RequestMethod.POST})
     public ModelAndView pickNumber(){
@@ -36,7 +40,10 @@ public class NumberCt {
         ModelAndView mv=new ModelAndView("/number/numberList");
 
         List<NumberData> numberList=numberSv.getNumbers();
+        List<WinNumberData> winNumberList=winNumberSv.getWinNumbers();
+        System.out.println(winNumberList);
         mv.addObject("numberList",numberList);
+        mv.addObject("winNumberList",winNumberList);
         return mv;
     }
 }

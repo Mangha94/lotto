@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
+import java.util.stream.Stream;
 
 /**
  * Created by LSH on 2017-07-18.
@@ -39,6 +40,7 @@ public class NumberSvImp implements NumberSv {
         NumberData numberData=new NumberData();
         int[]num=new int[6];
         Random randomNum=new Random();
+
         for(int i=0;i<=5;i++){
             num[i]=randomNum.nextInt(61)+1;
             for(int j=0;j<i;j++){
@@ -59,6 +61,9 @@ public class NumberSvImp implements NumberSv {
         numberData.setRank(0);
 
         int newTimes=getMaxTimes();
+        if(newTimes==0){
+            newTimes=1;
+        }
         Calendar today=Calendar.getInstance();
         if(today.get(Calendar.DAY_OF_WEEK)==1){
             newTimes++;
@@ -83,97 +88,52 @@ public class NumberSvImp implements NumberSv {
     public void setRank(int times){
 
         WinNumberData winNumberData=winNumberSv.getWinNumber(times);
-        int[] winNumber=new int[7];
-        winNumber[0]=winNumberData.getNum1();
-        winNumber[1]=winNumberData.getNum2();
-        winNumber[2]=winNumberData.getNum3();
-        winNumber[3]=winNumberData.getNum4();
-        winNumber[4]=winNumberData.getNum5();
-        winNumber[5]=winNumberData.getNum6();
-        winNumber[6]=winNumberData.getBonusNum();
-
+        int[]winNumber=winNumberData.getNumArr();
         List<NumberData> numberData=getNumber_times(times);
-        System.out.println(numberData);
         NumberSetRankData numberSetRankData=new NumberSetRankData();
-        int count=0;
-        int bonusCnt=0;
+
         for(NumberData number : numberData){
-            for(int i=0;i<=5;i++){
-                if(number.getNum1()==winNumber[i]){
-                    count++;
-                }
-                if(number.getNum2()==winNumber[i]){
-                    count++;
-                }
-                if(number.getNum3()==winNumber[i]){
-                    count++;
-                }
-                if(number.getNum4()==winNumber[i]){
-                    count++;
-                }
-                if(number.getNum5()==winNumber[i]){
-                    count++;
-                }
-                if(number.getNum6()==winNumber[i]){
-                    count++;
-                }
-                if(count==5){
-                    if(winNumber[6]==number.getNum1()){
-                        bonusCnt++;
-                    }
-                    if(winNumber[6]==number.getNum2()){
-                        bonusCnt++;
-                    }
-                    if(winNumber[6]==number.getNum3()){
-                        bonusCnt++;
-                    }
-                    if(winNumber[6]==number.getNum4()){
-                        bonusCnt++;
-                    }
-                    if(winNumber[6]==number.getNum5()){
-                        bonusCnt++;
-                    }
-                    if(winNumber[6]==number.getNum6()){
-                        bonusCnt++;
-                    }
-                }
+            int count=0;
+            boolean bonusChk=false;
 
-
-            }
-            if(count==6){
-                numberSetRankData.setNo(number.getNo());
-                numberSetRankData.setRank(1);
-                numberRepository.setRank(numberSetRankData.makeMap());
-            }
-            if(count==5 && bonusCnt==2){
-                numberSetRankData.setNo(number.getNo());
-                numberSetRankData.setRank(2);
-                numberRepository.setRank(numberSetRankData.makeMap());
-            }
-            if(count==5 && bonusCnt!=2){
-                numberSetRankData.setNo(number.getNo());
-                numberSetRankData.setRank(3);
-                numberRepository.setRank(numberSetRankData.makeMap());
-            }
-            if(count==4){
-                numberSetRankData.setNo(number.getNo());
-                numberSetRankData.setRank(4);
-                numberRepository.setRank(numberSetRankData.makeMap());
-            }
-            if(count==3){
-                numberSetRankData.setNo(number.getNo());
-                numberSetRankData.setRank(5);
-                numberRepository.setRank(numberSetRankData.makeMap());
-            }
-            if(count<3){
-                numberSetRankData.setNo(number.getNo());
-                numberSetRankData.setRank(0);
-                numberRepository.setRank(numberSetRankData.makeMap());
-                return;
+            for (int i : winNumber)
+            {
+                if (number.checkNum(winNumber[i]))
+                    count++;
             }
 
+//            count = (int) Arrays.stream (winNumber).filter(number::checkNum).count();
+
+            if(count==5 && number.checkNum(winNumberData.getBonusNum())){
+                bonusChk = true;
+            }
+
+            numberSetRankData.setRank (calcRank(count, bonusChk));
+            numberSetRankData.setNo(number.getNo());
+
+            numberRepository.setRank(numberSetRankData.makeMap());
         }
 
+    }
 
+    private int calcRank(int count, boolean bonusChk) {
+        if(count==6){
+            return 1;
+        }
+        else if(count==5 && bonusChk){
+            return 2;
+        }
+        else if(count==5){
+            return 3;
+        }
+        else if(count==4){
+            return 4;
+        }
+        else if(count==3){
+            return 5;
+        }
+        else{
+            return 0;
+        }
     }
 }

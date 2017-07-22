@@ -77,4 +77,16 @@ public class WinNumberData {
     public void setTimes(Integer times) {
         this.times = times;
     }
+
+    public int[] getNumArr ()
+    {
+        int[] winNumber=new int[6];
+        winNumber[0]=getNum1();
+        winNumber[1]=getNum2();
+        winNumber[2]=getNum3();
+        winNumber[3]=getNum4();
+        winNumber[4]=getNum5();
+        winNumber[5]=getNum6();
+        return winNumber;
+    }
 }

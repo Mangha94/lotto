@@ -41,7 +41,12 @@ public class NumberRepositoryImp extends SqlSessionDaoSupport implements NumberR
     }
 
     public int getMaxTimes(){
-        return getSqlSession().selectOne("getMaxTimes");
+        Integer val = (Integer) getSqlSession().selectOne("getMaxTimes");
+
+        if (val == null)
+            return 0;
+        else
+            return val;
     }
 
     /**

@@ -10,7 +10,7 @@ public interface NumberSv {
      * 뽑은 번호 목록을 가져온다
      * @return 번호 목록 리스트
      */
-    List<NumberData>getNumbers();
+    List<NumberData> getNumbers();
 
     /**
      * 해당 회차에 해당하는 뽑은 번호 목록을 가져온다
