@@ -4,7 +4,21 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="/WEB-INF/top.jsp"></jsp:include>
+<script src="https://code.jquery.com/jquery-1.12.4.min.js">
+</script>
+<script type="text/javascript">
+    $(document).ready(function(){
+        var winNumList=new Array();
 
+            <c:forEach var="winNum" items="${winNumberList}">
+                winNumList.push("${winNum.num1}")
+            </c:forEach>
+        for(var i=0;i<=6;i++){
+            $('inputNum[winNumList]').css('background', 'red');
+        }
+    });
+
+</script>
 <div class="row">
 
     <div class="col-xs-12 col-md-12">
@@ -56,65 +70,37 @@
                 </tr>
                 </thead>
                 <tbody>
-                    <c:forEach items="${numberList}" var="num">
-                        <c:forEach items="${winNumberList}" var="winNum">
-                        <tr>
-                            <td></td>
+                        <c:forEach items="${numberList}" var="num">
+                            <tr>
+                                <td></td>
 
-                            <td>
-                                <c:forEach items="${winNum.numArr}" var="wnum">
-                                    <span style="color:${num.num1 eq winNum.num1 ? 'red' : 'black' }">${num.num1}</span>
-                                </c:forEach>
-                            </td>
-                            <td>
-                                <span style="color:${num.num2 eq winNum.num1 ? 'red' : 'black' }">${num.num2}</span>
-                                <span style="color:${num.num2 eq winNum.num2 ? 'red' : 'black' }">${num.num2}</span>
-                                <span style="color:${num.num2 eq winNum.num3 ? 'red' : 'black' }">${num.num2}</span>
-                                <span style="color:${num.num2 eq winNum.num4 ? 'red' : 'black' }">${num.num2}</span>
-                                <span style="color:${num.num2 eq winNum.num5 ? 'red' : 'black' }">${num.num2}</span>
-                                <span style="color:${num.num2 eq winNum.num6 ? 'red' : 'black' }">${num.num2}</span>
-                            </td>
-                            <td>
-                                <span style="color:${num.num3 eq winNum.num1 ? 'red' : 'black' }">${num.num3}</span>
-                                <span style="color:${num.num3 eq winNum.num2 ? 'red' : 'black' }">${num.num3}</span>
-                                <span style="color:${num.num3 eq winNum.num3 ? 'red' : 'black' }">${num.num3}</span>
-                                <span style="color:${num.num3 eq winNum.num4 ? 'red' : 'black' }">${num.num3}</span>
-                                <span style="color:${num.num3 eq winNum.num5 ? 'red' : 'black' }">${num.num3}</span>
-                                <span style="color:${num.num3 eq winNum.num6 ? 'red' : 'black' }">${num.num3}</span>
-                            </td>
-                            <td><span style="color:${num.num4 eq winNum.num1 ? 'red' : 'black' }">${num.num4}</span>
-                                <span style="color:${num.num4 eq winNum.num2 ? 'red' : 'black' }">${num.num4}</span>
-                                <span style="color:${num.num4 eq winNum.num3 ? 'red' : 'black' }">${num.num4}</span>
-                                <span style="color:${num.num4 eq winNum.num4 ? 'red' : 'black' }">${num.num4}</span>
-                                <span style="color:${num.num4 eq winNum.num5 ? 'red' : 'black' }">${num.num4}</span>
-                                <span style="color:${num.num4 eq winNum.num6 ? 'red' : 'black' }">${num.num4}</span>
-                            </td>
-                            <td>
-                                <span style="color:${num.num5 eq winNum.num1 ? 'red' : 'black' }">${num.num5}</span>
-                                <span style="color:${num.num5 eq winNum.num2 ? 'red' : 'black' }">${num.num5}</span>
-                                <span style="color:${num.num5 eq winNum.num3 ? 'red' : 'black' }">${num.num5}</span>
-                                <span style="color:${num.num5 eq winNum.num4 ? 'red' : 'black' }">${num.num5}</span>
-                                <span style="color:${num.num5 eq winNum.num5 ? 'red' : 'black' }">${num.num5}</span>
-                                <span style="color:${num.num5 eq winNum.num6 ? 'red' : 'black' }">${num.num5}</span>
-                            </td>
-                            <td>
-                                <span style="color:${num.num6 eq winNum.num1 ? 'red' : 'black' }">${num.num6}</span>
-                                <span style="color:${num.num6 eq winNum.num2 ? 'red' : 'black' }">${num.num6}</span>
-                                <span style="color:${num.num6 eq winNum.num3 ? 'red' : 'black' }">${num.num6}</span>
-                                <span style="color:${num.num6 eq winNum.num4 ? 'red' : 'black' }">${num.num6}</span>
-                                <span style="color:${num.num6 eq winNum.num5 ? 'red' : 'black' }">${num.num6}</span>
-                                <span style="color:${num.num6 eq winNum.num6 ? 'red' : 'black' }">${num.num6}</span>
-                            </td>
-                            <td>${num.times} 회차</td>
-                            <td>
-                                <fmt:formatDate value="${num.pickDate}" var="dateFmt" pattern="yyyy/MM/dd"/>
-                                ${dateFmt}
-                            </td>
-                            <td>${num.rank} 등</td>
+                                <td>
+                                    <span class='inputNumber' num='${num.num1}'>${num.num1}</span>
+                                </td>
+                                <td>
+                                    <span class='inputNumber' num='${num.num2}'>${num.num2}</span>
+                                </td>
+                                <td>
+                                    <span class='inputNumber' num='${num.num3}'>${num.num3}</span>
+                                </td>
+                                <td>
+                                    <span class='inputNumber' num='${num.num4}'>${num.num4}</span>
+                                </td>
+                                <td>
+                                    <span class='inputNumber' num='${num.num5}'>${num.num5}</span>
+                                </td>
+                                <td>
+                                    <span class='inputNumber' num='${num.num6}'>${num.num6}</span>
+                                </td>
+                                <td>${num.times} 회차</td>
+                                <td>
+                                    <fmt:formatDate value="${num.pickDate}" var="dateFmt" pattern="yyyy/MM/dd"/>
+                                        ${dateFmt}
+                                </td>
+                                <td>${num.rank} 등</td>
 
-                        </tr>
+                            </tr>
                         </c:forEach>
-                    </c:forEach>
                 </tbody>
 
 

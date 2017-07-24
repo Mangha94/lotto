@@ -24,12 +24,6 @@ public interface NumberSv {
     void pickNumbers();
 
     /**
-     * 가장 최근 회차를 구한다
-     * @return 최근 회차
-     */
-    int getMaxTimes();
-
-    /**
      * 당첨번호를 조회하여 해당 회차에 뽑은 번호들의 등수를 매긴다
      * @param times 회차에 해당하는 번호
      */

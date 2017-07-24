@@ -7,6 +7,7 @@
 
     function pickNumber() {
         location.href="/number/pickNum.do";
+        alert("번호 뽑기 성공!");
     }
 
 </script>

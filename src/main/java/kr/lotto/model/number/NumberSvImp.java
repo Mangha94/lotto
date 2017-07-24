@@ -5,8 +5,13 @@ import kr.lotto.model.winNumber.WinNumberSv;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 import java.util.stream.Stream;
+
+import static java.lang.Math.floor;
 
 /**
  * Created by LSH on 2017-07-18.
@@ -60,22 +65,22 @@ public class NumberSvImp implements NumberSv {
         numberData.setPickDate(new Date());
         numberData.setRank(0);
 
-        int newTimes=getMaxTimes();
-        if(newTimes==0){
-            newTimes=1;
+        //todo 회차 계산 로직(시간 까지 조정 필요)
+        int times=765;
+        LocalDateTime firstTime=LocalDateTime.of(2017,7,22,20,00);
+        LocalDateTime pickTime=LocalDateTime.now();
+        long weekDf=ChronoUnit.WEEKS.between(firstTime,pickTime);
+        long timeDf=ChronoUnit.HOURS.between(firstTime,pickTime);
+        if(weekDf>=1){
+            if(timeDf%24>=0){
+                times=times+(int)weekDf;
+            }
         }
-        Calendar today=Calendar.getInstance();
-        if(today.get(Calendar.DAY_OF_WEEK)==1){
-            newTimes++;
-        }
-        numberData.setTimes(newTimes);
+        numberData.setTimes(times);
+
 
 
         numberRepository.pickNumbers(numberData);
-    }
-
-    public int getMaxTimes(){
-        return numberRepository.getMaxTimes();
     }
 
 
@@ -90,19 +95,20 @@ public class NumberSvImp implements NumberSv {
         WinNumberData winNumberData=winNumberSv.getWinNumber(times);
         int[]winNumber=winNumberData.getNumArr();
         List<NumberData> numberData=getNumber_times(times);
+
         NumberSetRankData numberSetRankData=new NumberSetRankData();
 
         for(NumberData number : numberData){
-            int count=0;
+            int count;
             boolean bonusChk=false;
+//            System.out.println(number);
+//            for (int i : winNumber)
+//            {
+//                if (number.checkNum(winNumber[i]))
+//                    count++;
+//            }
 
-            for (int i : winNumber)
-            {
-                if (number.checkNum(winNumber[i]))
-                    count++;
-            }
-
-//            count = (int) Arrays.stream (winNumber).filter(number::checkNum).count();
+            count = (int) Arrays.stream (winNumber).filter(number::checkNum).count();
 
             if(count==5 && number.checkNum(winNumberData.getBonusNum())){
                 bonusChk = true;

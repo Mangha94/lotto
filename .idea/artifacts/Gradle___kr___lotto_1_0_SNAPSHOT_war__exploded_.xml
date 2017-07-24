@@ -38,8 +38,8 @@
           <element id="library" level="project" name="Gradle: org.projectlombok:lombok:1.16.16" />
           <element id="library" level="project" name="Gradle: commons-io:commons-io:2.2" />
           <element id="library" level="project" name="Gradle: commons-pool:commons-pool:1.5.4" />
-          <element id="library" level="project" name="Gradle: jstl:jstl:1.2" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-core:4.1.7.RELEASE" />
+          <element id="library" level="project" name="Gradle: jstl:jstl:1.2" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-expression:4.1.7.RELEASE" />
           <element id="library" level="project" name="Gradle: aopalliance:aopalliance:1.0" />
           <element id="library" level="project" name="Gradle: org.springframework:spring-web:4.1.7.RELEASE" />

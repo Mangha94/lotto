@@ -41,9 +41,18 @@ public class NumberCt {
 
         List<NumberData> numberList=numberSv.getNumbers();
         List<WinNumberData> winNumberList=winNumberSv.getWinNumbers();
-        System.out.println(winNumberList);
         mv.addObject("numberList",numberList);
         mv.addObject("winNumberList",winNumberList);
         return mv;
     }
+
+//    @RequestMapping(value = "/showPickNumber.do",method = RequestMethod.GET)
+//        public ModelAndView showPickNumber(){
+//            ModelAndView mv=new ModelAndView("/number/showPickNumber");
+//
+//            List<NumberData> numberList=numberSv.getNumbers();
+//
+//            mv.addObject("showPickNumber",numberList);
+//            return mv;
+//    }
 }
