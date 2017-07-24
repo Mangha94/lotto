@@ -31,8 +31,10 @@ public class NumberCt {
 
     @RequestMapping(value = "/pickNum.do",method = RequestMethod.GET)
     public String pickNum(){
-        numberSv.pickNumbers();
-        return "redirect:/number/pickNumber.do";
+        NumberData numberData = numberSv.pickNumbers();
+
+
+        return "redirect:/number/pickNumber.do?mode=" + numberData.getNum1();
     }
 
     @RequestMapping(value="/numberList.do",method = RequestMethod.GET)

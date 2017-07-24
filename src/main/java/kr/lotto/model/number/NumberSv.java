@@ -21,7 +21,7 @@ public interface NumberSv {
     /**
      * 랜덤한 번호 6개 +  랜덤한 보너스 번호 1개를 뽑아 리스트에 저장
      */
-    void pickNumbers();
+    NumberData pickNumbers();
 
     /**
      * 당첨번호를 조회하여 해당 회차에 뽑은 번호들의 등수를 매긴다

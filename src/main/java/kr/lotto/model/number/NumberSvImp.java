@@ -41,7 +41,7 @@ public class NumberSvImp implements NumberSv {
      * 랜덤한 6개의 숫자와 보너스 숫자 1개를 구한다
      */
     @Override
-    public void pickNumbers(){
+    public NumberData pickNumbers(){
         NumberData numberData=new NumberData();
         int[]num=new int[6];
         Random randomNum=new Random();
@@ -72,7 +72,7 @@ public class NumberSvImp implements NumberSv {
         long weekDf=ChronoUnit.WEEKS.between(firstTime,pickTime);
         long timeDf=ChronoUnit.HOURS.between(firstTime,pickTime);
         if(weekDf>=1){
-            if(timeDf%24>=0){
+            if(timeDf%24>=20){
                 times=times+(int)weekDf;
             }
         }
@@ -81,6 +81,8 @@ public class NumberSvImp implements NumberSv {
 
 
         numberRepository.pickNumbers(numberData);
+
+        return numberData;
     }
 
 

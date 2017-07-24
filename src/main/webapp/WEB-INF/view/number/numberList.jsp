@@ -4,18 +4,36 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <jsp:include page="/WEB-INF/top.jsp"></jsp:include>
-<script src="https://code.jquery.com/jquery-1.12.4.min.js">
-</script>
+
 <script type="text/javascript">
+
     $(document).ready(function(){
-        var winNumList=new Array();
 
             <c:forEach var="winNum" items="${winNumberList}">
-                winNumList.push("${winNum.num1}")
+                var nums = [];
+
+                <c:forEach var = "num" items="${winNum.numArr}">
+                   nums.push("${num}");
+
+                 </c:forEach>
+            $(nums).each (function (num) {
+                $(".inputNumber[num='" + num + "'][times='${winNum.times}']")
+                    .css("display", "inline-block")
+                    .css('background', 'red')
+                    .css('color', '#fff')
+                    .css('padding', '3px')
+                    .css('border-radius', '10px');
+            });
+
+
+                $(".inputNumber[num='${winNum.bonusNum}'][times='${winNum.times}']")
+                    .css("display", "inline-block")
+                    .css('background', 'blue')
+                    .css('color', '#fff')
+                    .css('padding', '3px')
+                    .css('border-radius', '10px');
             </c:forEach>
-        for(var i=0;i<=6;i++){
-            $('inputNum[winNumList]').css('background', 'red');
-        }
+
     });
 
 </script>
@@ -75,22 +93,22 @@
                                 <td></td>
 
                                 <td>
-                                    <span class='inputNumber' num='${num.num1}'>${num.num1}</span>
+                                    <span class='inputNumber' num='${num.num1}' times="${num.times}">${num.num1}</span>
                                 </td>
                                 <td>
-                                    <span class='inputNumber' num='${num.num2}'>${num.num2}</span>
+                                    <span class='inputNumber' num='${num.num2}' times="${num.times}">${num.num2}</span>
                                 </td>
                                 <td>
-                                    <span class='inputNumber' num='${num.num3}'>${num.num3}</span>
+                                    <span class='inputNumber' num='${num.num3}' times="${num.times}">${num.num3}</span>
                                 </td>
                                 <td>
-                                    <span class='inputNumber' num='${num.num4}'>${num.num4}</span>
+                                    <span class='inputNumber' num='${num.num4}' times="${num.times}">${num.num4}</span>
                                 </td>
                                 <td>
-                                    <span class='inputNumber' num='${num.num5}'>${num.num5}</span>
+                                    <span class='inputNumber' num='${num.num5}' times="${num.times}">${num.num5}</span>
                                 </td>
                                 <td>
-                                    <span class='inputNumber' num='${num.num6}'>${num.num6}</span>
+                                    <span class='inputNumber' num='${num.num6}' times="${num.times}">${num.num6}</span>
                                 </td>
                                 <td>${num.times} 회차</td>
                                 <td>
