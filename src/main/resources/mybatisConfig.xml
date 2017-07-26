@@ -12,6 +12,7 @@
 	 <typeAliases>
 		 <typeAlias alias="NumberData" type="kr.lotto.model.number.NumberData" />
 		 <typeAlias alias="WinNumberData" type="kr.lotto.model.winNumber.WinNumberData" />
+		 <typeAlias alias="MemberData" type="kr.lotto.model.member.MemberData" />
 	 </typeAliases>
 	 
 	 <mappers>

@@ -28,4 +28,6 @@ public interface NumberSv {
      * @param times 회차에 해당하는 번호
      */
     void setRank(int times);
+
+    List<NumberData> showPickNumber();
 }

@@ -6,8 +6,23 @@
 <script>
 
     function pickNumber() {
-        location.href="/number/pickNum.do";
-        alert("번호 뽑기 성공!");
+
+        $.ajax({
+            type:"GET",
+            url:"/number/pickNum.do",
+            data:"html",
+            success:function(data,textStatus){
+                result=data;
+
+                alert("번호 뽑기 성공!");
+
+                reloadNumberList();
+            }
+        });
+    }
+
+    function reloadNumberList() {
+        $("#NumberForm").load("/number/showPickNumber.do");
     }
 
 </script>
@@ -26,8 +41,8 @@
 
                 </div>
 
-            <div class="panel-body">
-                <a href="javascript:pickNumber()" class="btn btn-primary">번호 뽑기!!!</a>
+            <div class="panel-body" id="NumberForm">
+                <jsp:include page="/WEB-INF/view/number/showPickNumber.jsp"></jsp:include>
             </div>
 
         </div>

@@ -40,6 +40,10 @@ public class NumberRepositoryImp extends SqlSessionDaoSupport implements NumberR
         getSqlSession().insert("pickNumbers",numberData);
     }
 
+    public List<NumberData>showPickNumber(){
+        return getSqlSession().selectList("showPickNumber");
+    }
+
     public int getMaxTimes(){
         Integer val = (Integer) getSqlSession().selectOne("getMaxTimes");
 

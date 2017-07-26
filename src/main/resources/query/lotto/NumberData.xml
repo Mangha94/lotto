@@ -41,6 +41,12 @@
 
     </select>
 
+    <select id="showPickNumber" resultType="NumberData">
+
+        SELECT <include refid="fldNumber"/> FROM NumberData WHERE pickDate>CURRENT_DATE() order by no desc limit 0,10;
+
+    </select>
+
     <insert id="pickNumbers" parameterType="NumberData">
 
         INSERT INTO NumberData(num1,num2,num3,num4,num5,num6,pickDate,times)

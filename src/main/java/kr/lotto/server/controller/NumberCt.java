@@ -23,38 +23,41 @@ public class NumberCt {
     @Autowired
     private WinNumberSv winNumberSv;
 
-    @RequestMapping(value = "/pickNumber.do",method = {RequestMethod.GET,RequestMethod.POST})
-    public ModelAndView pickNumber(){
-        ModelAndView mv=new ModelAndView("/number/pickNumber");
+    @RequestMapping(value = "/pickNumber.do", method = {RequestMethod.GET, RequestMethod.POST})
+    public ModelAndView pickNumber() {
+        ModelAndView mv = new ModelAndView("/number/pickNumber");
+        List<NumberData> numberList = numberSv.showPickNumber();
+        mv.addObject("numberList", numberList);
         return mv;
     }
 
-    @RequestMapping(value = "/pickNum.do",method = RequestMethod.GET)
-    public String pickNum(){
+    @RequestMapping(value = "/pickNum.do", method = RequestMethod.GET)
+    public ModelAndView pickNum() {
         NumberData numberData = numberSv.pickNumbers();
 
+        ModelAndView mv = new ModelAndView("/number/showPickNumber");
 
-        return "redirect:/number/pickNumber.do?mode=" + numberData.getNum1();
-    }
-
-    @RequestMapping(value="/numberList.do",method = RequestMethod.GET)
-        public ModelAndView numberList(){
-        ModelAndView mv=new ModelAndView("/number/numberList");
-
-        List<NumberData> numberList=numberSv.getNumbers();
-        List<WinNumberData> winNumberList=winNumberSv.getWinNumbers();
-        mv.addObject("numberList",numberList);
-        mv.addObject("winNumberList",winNumberList);
+        mv.addObject("numberData", numberData);
         return mv;
     }
 
-//    @RequestMapping(value = "/showPickNumber.do",method = RequestMethod.GET)
-//        public ModelAndView showPickNumber(){
-//            ModelAndView mv=new ModelAndView("/number/showPickNumber");
-//
-//            List<NumberData> numberList=numberSv.getNumbers();
-//
-//            mv.addObject("showPickNumber",numberList);
-//            return mv;
-//    }
+    @RequestMapping(value = "/numberList.do", method = RequestMethod.GET)
+    public ModelAndView numberList() {
+        ModelAndView mv = new ModelAndView("/number/numberList");
+
+        List<NumberData> numberList = numberSv.getNumbers();
+        List<WinNumberData> winNumberList = winNumberSv.getWinNumbers();
+        mv.addObject("numberList", numberList);
+        mv.addObject("winNumberList", winNumberList);
+        return mv;
+    }
+
+    @RequestMapping(value = "/showPickNumber.do", method = RequestMethod.GET)
+    public ModelAndView showPickNumber() {
+
+        ModelAndView mv = new ModelAndView("/number/showPickNumber");
+        List<NumberData> numberList = numberSv.showPickNumber();
+        mv.addObject("numberList", numberList);
+        return mv;
+    }
 }

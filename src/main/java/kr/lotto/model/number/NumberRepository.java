@@ -32,6 +32,8 @@ public interface NumberRepository {
      */
     int getMaxTimes();
 
+    List<NumberData>showPickNumber();
+
     /**
      * 회차에 해당하는 번호들을 조회하여 해당 회차 당첨번호와 비교하여
      * 등수를 매긴다

@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis-3-mapper.dtd">
+
+
+<mapper namespace="memberData">
+
+    <resultMap id="MemberRs" type="MemberData">
+        <result column="memberId " property="memberId " />
+        <result column="pw" property="pw" />
+        <result column="name" property="name" />
+    </resultMap>
+
+    <sql id = "fldMember">
+        memberId,
+        pw,
+        name
+    </sql>
+
+
+    <select id="getMember" resultMap="MemberRs">
+
+        SELECT <include refid="fldMember"/> FROM memberData WHERE memberId=#{memberId}
+
+    </select>
+
+    <insert id="addMember" parameterType="MemberData">
+
+        INSERT INTO memberData (memberId,pw,name) VALUE (#{memberId},#{pw},#{name})
+
+    </insert>
+
+    <update id="modifyMember" parameterType="MemberData">
+
+        UPDATE memberData SET pw=#{pw},name=#{name} WHERE memberId=#{memberId}
+
+    </update>
+
+    <delete id="deleteMember" parameterType="String">
+
+        DELETE FROM memberData WHERE memberId=#{memberId}
+
+    </delete>
+
+    <select id="getCount" resultType="int">
+
+        SELECT COUNT(memberId) FROM memberData
+
+    </select>
+
+    <select id="getCountMemberId" parameterType="String" resultType="int">
+
+        SELECT COUNT(memberId) FROM memberData WHERE memberId=#{memberId}
+
+    </select>
+
+    <sql id = "memberWhere">
+
+        <where>
+
+            <if test = "name != null">
+                AND name LIKE '%${name}%'
+            </if>
+
+            <if test = "memberId != null">
+                AND memberId = #{memberId}
+            </if>
+
+            <if test = "email != null">
+                AND email LIKE '%${email}%'
+            </if>
+
+        </where>
+
+    </sql>
+
+    <select id="searchMember" parameterType="map" resultType="MemberData">
+
+        SELECT <include refid="fldMember" /> FROM memberData
+
+        <include refid="memberWhere" />
+
+        ORDER BY ${orderVal} ${orderAsc}
+
+        limit ${limitStart},${articlesPerPage}
+
+    </select>
+
+    <select id="searchMemberCnt" parameterType="map" resultType="int">
+
+        SELECT COUNT(memberId) FROM memberData
+
+        <include refid="memberWhere" />
+
+    </select>
+</mapper>

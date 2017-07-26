@@ -32,6 +32,11 @@ public class NumberSvImp implements NumberSv {
         return numberRepository.getNumbers();
     }
 
+    /**
+     * 회차에 해당하는 뽑은 목록을 가져온다
+     * @param times 회차
+     * @return 회차에 해당하는 뽑은 목록
+     */
     @Override
     public List<NumberData>getNumber_times(int times){
         return numberRepository.getNumber_times(times);
@@ -65,24 +70,23 @@ public class NumberSvImp implements NumberSv {
         numberData.setPickDate(new Date());
         numberData.setRank(0);
 
-        //todo 회차 계산 로직(시간 까지 조정 필요)
         int times=765;
         LocalDateTime firstTime=LocalDateTime.of(2017,7,22,20,00);
         LocalDateTime pickTime=LocalDateTime.now();
         long weekDf=ChronoUnit.WEEKS.between(firstTime,pickTime);
-        long timeDf=ChronoUnit.HOURS.between(firstTime,pickTime);
         if(weekDf>=1){
-            if(timeDf%24>=20){
-                times=times+(int)weekDf;
-            }
+            times=times+(int)weekDf;
         }
         numberData.setTimes(times);
-
-
 
         numberRepository.pickNumbers(numberData);
 
         return numberData;
+    }
+
+    @Override
+    public List<NumberData>showPickNumber(){
+        return numberRepository.showPickNumber();
     }
 
 
