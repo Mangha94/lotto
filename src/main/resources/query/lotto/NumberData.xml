@@ -60,6 +60,12 @@
 
     </select>
 
+    <select id="getCount" resultType="int">
+
+        SELECT count(times) FROM NumberData
+
+    </select>
+
     <update id="setRank" parameterType="map">
 
         UPDATE NumberData SET rank=#{rank} WHERE no=#{no}

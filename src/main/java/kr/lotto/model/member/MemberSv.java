@@ -6,6 +6,7 @@ import kr.lotto.model.PagingList;
 
 import java.util.Optional;
 
+
 public interface MemberSv {
     /**
      * 해당 회원정보를 가져온다

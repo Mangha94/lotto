@@ -18,7 +18,7 @@ public class NumberRepositoryImp extends SqlSessionDaoSupport implements NumberR
      */
     @Override
     public List<NumberData>getNumbers(){
-        return getSqlSession().selectList("getNumbers");
+        return getSqlSession().selectList("Number.getNumbers");
     }
 
     /**
@@ -28,7 +28,7 @@ public class NumberRepositoryImp extends SqlSessionDaoSupport implements NumberR
      */
     @Override
     public List<NumberData>getNumber_times(int times){
-        return getSqlSession().selectList("getNumber_times",times);
+        return getSqlSession().selectList("Number.getNumber_times",times);
     }
 
     /**
@@ -37,15 +37,15 @@ public class NumberRepositoryImp extends SqlSessionDaoSupport implements NumberR
      */
     @Override
     public void pickNumbers(NumberData numberData){
-        getSqlSession().insert("pickNumbers",numberData);
+        getSqlSession().insert("Number.pickNumbers",numberData);
     }
 
     public List<NumberData>showPickNumber(){
-        return getSqlSession().selectList("showPickNumber");
+        return getSqlSession().selectList("Number.showPickNumber");
     }
 
     public int getMaxTimes(){
-        Integer val = (Integer) getSqlSession().selectOne("getMaxTimes");
+        Integer val = (Integer) getSqlSession().selectOne("Number.getMaxTimes");
 
         if (val == null)
             return 0;
@@ -59,6 +59,6 @@ public class NumberRepositoryImp extends SqlSessionDaoSupport implements NumberR
      */
     @Override
     public void setRank(Map<String,Object> numberMap){
-        getSqlSession().update("setRank",numberMap);
+        getSqlSession().update("Number.setRank",numberMap);
     }
 }

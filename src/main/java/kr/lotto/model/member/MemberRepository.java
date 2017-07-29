@@ -10,10 +10,13 @@ public interface MemberRepository {
     int getCountMemberId(String memberId);
     //등록하기
     void addMember(MemberData memberData);
+
     //삭제하기
     void deleteMember(String memberId);
+
     //수정하기
     void modifyMember(MemberData memberData);
+
     //전체 갯수 구하기
     int getCount();
 

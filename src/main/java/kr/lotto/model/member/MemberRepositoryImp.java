@@ -11,41 +11,41 @@ public class MemberRepositoryImp extends SqlSessionDaoSupport implements MemberR
 
     @Override
     public MemberData getMember(String memberId){
-        return getSqlSession().selectOne("memberData.getMember",memberId);
+        return getSqlSession().selectOne("MemberData.getMember",memberId);
     }
 
     @Override
     public int getCountMemberId(String memberId){
-        return getSqlSession().selectOne("memberData.getCountMemberId",memberId);
+        return getSqlSession().selectOne("MemberData.getCountMemberId",memberId);
     }
     @Override
     public void addMember(MemberData memberData){
-        getSqlSession().insert("memberData.addMember",memberData);
+        getSqlSession().insert("MemberData.addMember",memberData);
     }
 
     @Override
     public void deleteMember(String memberId){
-        getSqlSession().delete("memberData.deleteMember",memberId);
+        getSqlSession().delete("MemberData.deleteMember",memberId);
     }
 
     @Override
     public void modifyMember(MemberData memberData){
-        getSqlSession().update("memberData.modifyMember",memberData);
+        getSqlSession().update("MemberData.modifyMember",memberData);
     }
 
     @Override
     public int getCount(){
-        return getSqlSession().selectOne("memberData.getCount");
+        return getSqlSession().selectOne("MemberData.getCount");
     }
 
     @Override
     public int searchMemberCnt(Map<String,Object> searchMap){
-        return getSqlSession().selectOne("memberData.searchMemberCnt",searchMap);
+        return getSqlSession().selectOne("MemberData.searchMemberCnt",searchMap);
     }
 
     @Override
     public List<MemberData> searchMember(Map<String,Object> searchMap){
-        return getSqlSession().selectList("memberData.searchMember",searchMap);
+        return getSqlSession().selectList("MemberData.searchMember",searchMap);
     }
 
 

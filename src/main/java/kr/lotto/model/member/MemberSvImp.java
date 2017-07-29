@@ -1,10 +1,8 @@
 package kr.lotto.model.member;
 
-import kr.lotto.lib.StrLib;
 import kr.lotto.model.Paging;
 import kr.lotto.model.PagingList;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Service;
 
 import java.util.Date;
@@ -34,7 +32,6 @@ public class MemberSvImp implements MemberSv {
     /**
      *  회원을 등록한다
      * @param memberData 신규회원 정보
-     * @throws Exception 필수 인자의 유무와 중복아이디 체크
      */
     @Override
     public void addMember(MemberData memberData)
@@ -73,7 +70,6 @@ public class MemberSvImp implements MemberSv {
      * 회원 검색
      * @param paging 페이징 객체
      * @param searchData 검색 데이터
-     * @return
      */
 	@Override
     public PagingList<MemberData> searchMember (Paging paging, MemberSearchData searchData)
